@@ -9,11 +9,9 @@
 
 void print_to_98(int num)
 {
-	int i;
-
 	if (num > 98)
 	{
-		for (i = num; num >= 98; num--)
+		for (; num >= 98; num--)
 		{
 			printf("%d", num);
 			if (num != 98)
@@ -25,7 +23,7 @@ void print_to_98(int num)
 	}
 	else
 	{
-		for (i = num; num <= 98; num++)
+		for (; num <= 98; num++)
 		{
 			printf("%d", num);
 			if (num != 98)
@@ -35,5 +33,4 @@ void print_to_98(int num)
 		}
 		putchar('\n');
 	}
-	return (0);
 }
