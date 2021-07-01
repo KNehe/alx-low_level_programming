@@ -28,15 +28,16 @@ int _strlen(char *s)
 
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i, destLen;
+	int i;
 
-	destLen = _strlen(dest);
-
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n && src[i] != '\0'; i++)
 	{
 		dest[i] = src[i];
 	}
-
-	dest[destLen] = '\0';
+	if (_strlen(dest) > _strlen(src))
+	{
+		while (i < n)
+			dest[i++] = '\0';
+	}
 	return (dest);
 }
