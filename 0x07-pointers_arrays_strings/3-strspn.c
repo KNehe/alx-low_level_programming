@@ -1,21 +1,20 @@
 #include "holberton.h"
 /**
-  * _strchr - Find a character in a string
+  * _strspn - Gets length of a prefix substring
   * @s: Pointer to string to be searched
   * @c: Character to find
   * Return: Pointer to first occurence of c, otherwise NULL
 */
 
-char *_strchr(char *s, char c)
+char *_strspn(char *s, char c)
 {
-	int i;
 
-	for (i = 0; s[i] >= '\0'; i++)
+	for (; *s != '\0'; s++)
 	{
-		if (s[i] == c)
-			return (s + i);
+		if (*s == c)
+			return s;
 	}
-	return ('\0');
+	return (0);
 
 }
 
