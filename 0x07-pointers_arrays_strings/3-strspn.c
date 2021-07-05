@@ -2,19 +2,32 @@
 /**
   * _strspn - Gets length of a prefix substring
   * @s: Pointer to string to be searched
-  * @c: Character to find
-  * Return: Pointer to first occurence of c, otherwise NULL
+  * @accept: Pointer to string
+  * Return: Pointer the number of bytes of s from accept
 */
 
-char *_strspn(char *s, char c)
+unsigned int _strspn(char *s, char *accept)
 {
+	int i, j, k;
 
-	for (; *s != '\0'; s++)
+	k = 0;
+
+	for (i = 0; s[i] >= '\0'; i++)
 	{
-		if (*s == c)
-			return s;
+		for (j = 0; accept[j] > '\0'; j++)
+		{
+			if (s[i] == accept[j])
+			{
+				k++;
+				break;
+			}
+		}
+		if (accept[j] == '\0')
+		{
+			break;
+		}
 	}
-	return (0);
+	return (k);
 
 }
 
