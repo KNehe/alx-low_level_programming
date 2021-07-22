@@ -1,65 +1,85 @@
 #include "variadic_functions.h"
 #include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
 
 /**
-   * str_helper - Prints string
-   * @str: Pointer to string
-   * Return: void
-   */
-void str_helper(char *str)
+  * print_char - prints char
+  * @valist: valist
+  */
+void print_char(va_list valist)
 {
-	if (str == NULL)
+	printf("%c", va_arg(valist, int));
+}
+
+/**
+  * print_int - prints int
+  * @valist: valist
+  */
+void print_int(va_list valist)
+{
+	printf("%d", va_arg(valist, int));
+}
+
+/**
+  * print_float - prints float
+  * @valist: valist
+  */
+void print_float(va_list valist)
+{
+	printf("%f", va_arg(valist, double));
+}
+
+/**
+  * print_string - prints string
+  * @valist: valist
+  */
+void print_string(va_list valist)
+{
+	char *s;
+
+	s = va_arg(valist, char *);
+	if (s == NULL)
 	{
 		printf("(nil)");
 		return;
 	}
-	printf("%s", str);
+	printf("%s", s);
 }
+
 /**
-  * print_all - Prints anything
-  * @...: Unlimited args
-  * @format: String format
-  * Return: void
+  * print_all - prints anything
+  * @format: formats provided
   */
 void print_all(const char * const format, ...)
 {
-	const char *s;
-	va_list args;
-	int c, i;
-	float f;
-	char *str;
+	char *separator = "";
+	int i, j = 0;
+	va_list valist;
 
-	s = format;
-	va_start(args, format);
-	while (s && *s != '\0')
+	mytype choice[] = { {'c', print_char},
+		{'i', print_int},
+		{'f', print_float},
+		{'s', print_string},
+		{'\0', NULL} };
+	va_start(valist, format);
+	while (format != NULL && format[j] != '\0')
 	{
-		switch (*s)
+		i = 0;
+		while (choice[i].letter != '\0')
 		{
-			case 'c':
-				c = va_arg(args, int);
-				printf("%c", c);
-				break;
-			case 'i':
-				i = va_arg(args, int);
-				printf("%d", i);
-				break;
-			case  'f':
-				f = va_arg(args, double);
-				printf("%f", f);
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				str_helper(str);
-				break;
-			default:
-				break;
+			if (choice[i].letter == format[j])
+			{
+				printf("%s", separator);
+				choice[i].func(valist);
+				separator = ", ";
+			}
+			i++;
 		}
-		s++;
-		if (*s == 'c' || *s == 'i' || *s == 'f' || *s == 's')
-			printf(", ");
+		j++;
 	}
+	va_end(valist);
 	printf("\n");
-	va_end(args);
 }
+
+
+
