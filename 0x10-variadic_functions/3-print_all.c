@@ -4,10 +4,10 @@
 #include <string.h>
 
 /**
-  * str_helper - Prints string
-  * @str: Pointer to string
-  * Return: void
-  */
+   * str_helper - Prints string
+   * @str: Pointer to string
+   * Return: void
+   */
 void str_helper(char *str)
 {
 	if (str == NULL)
@@ -57,10 +57,9 @@ void print_all(const char * const format, ...)
 				break;
 		}
 		s++;
-		if (s && *s != '\0' && (*s == 'c' || *s == 'i' || *s == 'f' || *s == 's'))
+		if (*s == 'c' || *s == 'i' || *s == 'f' || *s == 's')
 			printf(", ");
 	}
 	printf("\n");
 	va_end(args);
 }
-
