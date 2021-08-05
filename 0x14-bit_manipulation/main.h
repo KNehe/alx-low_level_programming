@@ -11,5 +11,7 @@ int _putchar(char c);
 
 void print_binary(unsigned long int n);
 
+void rev(unsigned long int n);
+
 
 #endif
